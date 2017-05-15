@@ -254,7 +254,9 @@ $(document).ready(function () {
     $.getJSON(requestURL, {
       'zip' : zipcode,
     }, function(data) {
-      console.log(data);if (data.results && data.results.length >= 0) {
+      console.log(data);
+      if (data.results && data.results.length >= 0) {
+        console.log("The data exists in the form of 'data' because that's the name of the callback function, then it's returned as something called 'resutls'")
         $noResults.html('');
         var mySenators = '<h3 style="margin-top:10px; border-bottom: 2px solid #193742; color: #193742">Your Senators are: </h3>';
         var myRepresentatives = '<h3 style="margin-top:10px; border-bottom: 2px solid #193742; color: #193742">Your House Reps are: </h3>';
