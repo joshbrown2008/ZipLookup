@@ -254,9 +254,7 @@ $(document).ready(function () {
     $.getJSON(requestURL, {
       'zip' : zipcode,
     }, function(data) {
-      console.log(data);
-      console.log("This is something I'm writing as I'm trying to upload this file to GitHub as a repo. Keep on testing.")
-      if (data.results && data.results.length >= 0) {
+      console.log(data);if (data.results && data.results.length >= 0) {
         $noResults.html('');
         var mySenators = '<h3 style="margin-top:10px; border-bottom: 2px solid #193742; color: #193742">Your Senators are: </h3>';
         var myRepresentatives = '<h3 style="margin-top:10px; border-bottom: 2px solid #193742; color: #193742">Your House Reps are: </h3>';
