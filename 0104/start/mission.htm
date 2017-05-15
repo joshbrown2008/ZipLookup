@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>A little about us...</title>
+<link href="../../explorecalifornia/_css/main.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
+
+<style type="text/css">
+	#mainContent #rep-lookup {
+		font-family: georgia, serif;
+	}
+	
+	#rep-lookup div {
+		margin: 0 0 1em;
+	}
+	
+	#rep-lookup input[type=text] {
+		width: 8em;
+	}
+	
+	#rep-lookup-results {
+		color: #999;
+	}
+</style>
+</head>
+<body>
+<div id="wrapper">
+  <div id="header">
+    <h1><a href="index.htm" title="Return to the home page">Welcome to Explore California!</a></h1>
+  </div>
+  <div id="mainNav">
+    <ul id="baseNav">
+      <li><a href="tours.htm" title="Explore our tours" class="tours">Tours</a></li>
+      <li><a href="mission.htm" title="What we think" class="mission current">Mission</a></li>
+      <li><a href="contact.htm" title="Contact and support" class="contact">Contact</a></li>
+      <li><a href="resources.htm" title="Guidance and planning" class="resources">Resources</a></li>
+      <li><a href="explorers.htm" title="Join our community" class="explorers">Explorers</a></li>
+    </ul>
+</div>
+  <div id="mainContent">
+    <h1 id="pageID">Mission</h1>
+    <div id="mainArticle">
+		<h1>Advocacy</h1>
+		
+		<p>
+		We are very much in favor of <a href="http://www.govtrack.us/congress/bills/113/s39">Senate bill XYZABC</a>.  Please write a letter to your representatives asking for their support on this important bill.
+		</p>
+		
+		<h3>Who Are My Representatives?</h3>
+		
+		<p>
+		Fill in your address and we will look up the answer.  This requires JavaScript to work.  If you can't find them here, <a href="http://www.opencongress.org/people/senators" target="_blank">try OpenCongress</a>.
+		</p>
+		
+    <div id="locContainer">
+
+      <form action="" id="showLocation" style="margin-right:500px">
+        <button type="submit" id="btn-location" value="Show_Location">Show Location</button>          
+          <div id="myLocation" class="reps callOut" style="margin-top: 10px; padding-right: 150px; padding-bottom: 15px; display: none"></div>
+      </form>
+    
+    </div>
+    
+
+		<form action="" id="rep-lookup">
+			<div style="width: 222px">
+			<label for="txt-zip">ZIP code:</label>
+			<input type="text" id="txt-zip" name="zip" />
+			</div>
+			
+			<div>
+			<input type="submit" id="btn-lookup" value="Look up my reps" />
+			</div>
+		</form>
+		
+		<div id="rep-lookup-results" class="rep-lookup-results">
+      <div id="noResults"></div>
+      <div id="senateResults" class="reps callOut" style="margin-right:15px">
+      </div>
+      <div id="houseResults" class="reps callOut">
+      </div>
+			
+		</div>
+    </div>
+    
+    </div>
+  <div id="sidebar">
+      <div id="specials" class="callOut">
+        <h1>Monthly Specials</h1>
+        <h2 class="top"><img src="../../explorecalifornia/_images/calm_bug.gif" width="75" height="75" alt="California Calm" />California Calm</h2>
+        <p>Day Spa Package <br />
+          <a href="tours/tour_detail_cycle.htm">$250</a>        </p>
+        <h2><img src="../../explorecalifornia/_images/desert_bug.gif" width="75" height="75" alt="From desert to sea" />From Desert to Sea</h2>
+        <p>2 Day Salton Sea <br />
+          <a href="tours/tour_detail_cycle.htm">$350</a></p>
+        <h2><img src="../../explorecalifornia/_images/backpack_bug.gif" width="75" height="41" alt="Backpack Cali" />Backpack Cali</h2>
+        <p>Big Sur Retreat <br />
+          <a href="tours/tour_detail_cycle.htm">$620</a></p>
+      </div>
+
+    </div>
+  <div id="footer">
+<div id="footerMenu">
+  <h3>Quick Nav</h3>
+    <ul id="quickNav">
+      <li><a href="tours.htm" title="Explore our tours">Tours</a></li>
+      <li><a href="mission.htm" title="What we think">Mission</a></li>
+      <li><a href="contact.htm" title="Contact and support">Contact</a></li>
+      <li><a href="resources.htm" title="Guidance and planning">Resources</a></li>
+      <li><a href="explorers.htm" title="Join our community">Explorers</a></li>
+    </ul>
+</div>
+  <div id="footerBody">
+  <div id="footerMidCol">
+      <h3><a href="resources/faq.htm">FAQ</a></h3>
+      <p>Find out more about our tours</p>
+      <h3><a href="contact.htm">Support</a></h3>
+      <p>Need help? It's just a click away!</p>
+      <h3><a href="explorers/join.htm">Legal Disclaimer</a></h3>
+    </div>
+    <div id="footerRightCol">
+      <h1>Explore California</h1>
+      <p>5605 Nota Street<br />
+        Ventura, CA 93003</p>
+      <p class="phone">866.555.4310</p>
+    </div>
+</div>
+  </div>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../explorecalifornia/jquery.min.js"><\/script>')</script>
+<script>
+'use strict';
+var ZIPCode;
+
+
+$(document).ready(function() {
+  $('#showLocation').submit(function(e) {
+    e.preventDefault();
+    console.log('locatin JSON triggered.');
+    
+    var $myLocation = $('#myLocation');
+    var $btnVal = $('#btn-location').val();
+    console.log($btnVal);
+    if ($btnVal == "Show_Location") 
+      {
+        $('#myLocation').css('display', 'initial');
+        console.log($btnVal + ' clicked');
+        $('#btn-location').val('Clear');
+        $('#btn-location').html('Clear');
+        var requestURL = 'http://freegeoip.net/json/';
+
+        var locResp = '<h2 style="margin-top:10px; border-bottom: 2px solid #193742; color: #193742">Your Location</h2>';
+
+        $.getJSON(requestURL, function(data) {
+          console.log(data);
+          var country_code = data.country_code;
+          var country = data.country_name;
+          var ip = data.ip;
+          var time_zone = data.time_zone;
+          var latitude = data.latitude;
+          var longitude = data.longitude;
+          var city = data.city;
+          var state = data.region_name;
+          ZIPCode = data.zip_code;
+          
+          locResp += '<strong>Latitude:</strong> ' + latitude + '<br/>';
+          locResp += '<strong>Longitude:</strong> ' + longitude + '<br/>';
+          locResp += '<strong>IP Address:</strong> ' + ip + '<br/>';
+          locResp += '<strong>City:</strong> ' + city + '<br/>';
+          locResp += '<strong>State:</strong> ' + state + '<br/>';
+          locResp += '<strong>ZIP:</strong> ' + ZIPCode + '<br/><p>';
+          
+          locResp += '<div id="myMap" class="myMap"></div>';
+            require([
+              "esri/Map",
+              "esri/views/MapView",
+              "esri/Graphic",
+              "esri/geometry/Point",
+              "esri/symbols/SimpleMarkerSymbol",
+              "dojo/domReady!"
+            ], function(
+                Map, 
+                MapView, 
+                Graphic,
+                Point,
+                SimpleMarkerSymbol
+                ) {
+              console.log("Trying to load Esri Map here...");
+              var map = new Map({
+                basemap: "topo"
+              });
+              var view = new MapView({
+                container: "myMap",
+                map: map,
+                zoom: 10,
+                center: [longitude, latitude]
+              });
+              var point = new Point ({
+                longitude: longitude,
+                latitude: latitude
+              });
+              var markerSymbol = new SimpleMarkerSymbol ({
+                color: [226, 119, 40],
+                outline: {
+                  color: [225, 225, 225],
+                  width: 2
+                }
+              });
+              var pointGraphic = new Graphic ({
+                geometry: point,
+                symbol: markerSymbol
+              });
+
+              view.graphics.add(pointGraphic);
+            });
+
+          $myLocation.html(locResp);
+        })
+      }
+    if ($btnVal == "Clear")
+      {
+        console.log("Clearing Location info")
+        $('#myLocation').css('display', 'none');
+        $('#btn-location').val('Show_Location');
+        $('#btn-location').html('Show Location');
+      }
+  })
+});
+
+$(document).ready(function () {
+	$('#rep-lookup').submit(function(e){
+		e.preventDefault();
+		
+    var $noResults = $('#noResults');
+    var $senateResults = $('#senateResults');
+    var $houseResults = $('#houseResults');
+    var zipcode = ZIPCode;
+
+    if ($('txt-zip').val() == null) {
+      zipcode = ZIPCode;
+    } else {
+    var zipcode = $('#txt-zip').val();
+    }
+    
+
+    // collect the data
+
+    var requestURL = 'http://congress.api.sunlightfoundation.com/legislators/locate?callback=?';
+
+    $.getJSON(requestURL, {
+      'zip' : zipcode,
+    }, function(data) {
+      console.log(data);
+      if (data.results && data.results.length >= 0) {
+        $noResults.html('');
+        var mySenators = '<h3 style="margin-top:10px; border-bottom: 2px solid #193742; color: #193742">Your Senators are: </h3>';
+        var myRepresentatives = '<h3 style="margin-top:10px; border-bottom: 2px solid #193742; color: #193742">Your House Reps are: </h3>';
+        //var resultNum = 0;
+
+        $.each(data.results, function(i, rep) {
+          if ('senate' === rep.chamber.toLowerCase()) {
+            //resultNum = resultNum + 1;
+            mySenators += '<p>';
+            mySenators += '<a href="' + rep.contact_form + '" target="_blank">';
+            mySenators += rep.first_name + ' ' + rep.last_name;
+            mySenators += '</a>';
+            mySenators += '</p>';
+          }
+        });
+        //resultNum = 0;
+        $.each(data.results, function(i, rep) {
+          if ('house' === rep.chamber.toLowerCase()) {
+            //resultnum = resultNum + 1;
+            myRepresentatives += '<p>';
+            myRepresentatives += '<a href="' + rep.website + '" target="_blank">';
+            myRepresentatives += rep.first_name + ' ' + rep.last_name;
+            myRepresentatives += '</a>';
+            myRepresentatives += '</p>';
+          }
+        });
+        $senateResults.html(mySenators);
+        $houseResults.html(myRepresentatives);
+        } else  {
+        $senateResults.html('');
+        $houseResults.html('');
+        $noResults.html('<p>No leadership found for zip code ' + zipcode + '. Please try again.</p>');
+        
+      }      
+    });
+	});
+});
+
+
+</script>
+<script src="https://js.arcgis.com/4.3/"></script>
+</body>
+</html>
